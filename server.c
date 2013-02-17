@@ -174,6 +174,10 @@ void client_init(char type, char* inputfile, char* outputfile){
     }else if(type == 'E'){
         started++;
         if ((c = client_create_no_window(inputfile, outputfile)) )  {
+            if(c == NULL) {
+                fprintf(stderr,"ERROR: automated client could not be created");
+                exit(-1);
+            }
             rc = pthread_create(&(c->thread),&attr, client_run,(void *)c);
             if (rc) {
                  fprintf(stderr,"ERROR; return code from pthread_create() is %d\n", rc);
@@ -194,8 +198,8 @@ void stop_all_clients(){
 } 
 
 void allow_all_clients(){
-    pthread_cond_broadcast(&perm_given_cv);
     permission = 1;
+    pthread_cond_broadcast(&perm_given_cv);
     pthread_mutex_unlock(&perm_mutex);
     return;
 }
@@ -234,24 +238,15 @@ int main(int argc, char *argv[]) {
     char c;
     for(;;){ 
         printf(">");
-        c = getchar();
+        scanf("%c",&c);
         if(c == 'e'){
             client_init(c,NULL,NULL);
             fprintf(stdout, "Created a new interactive client \n");
         }else if(c == 'E'){
-            getchar();
-            char * input = NULL;
-            char * output = NULL;
-            int i = 0;
-            while((c = getchar() != ' ')){
-                input[i] = c;
-                i++;
-            }
-            i = 0;
-            while((c = getchar() != EOF)){
-                output[i] = c;
-                i++;
-            }
+            char input[4096];
+            char output[4096];
+            scanf("%s",input); 
+            scanf("%s",output);
             client_init(c,input,output);
             fprintf(stdout, "Created a new automated client \n");
         }else if(c == 's'){
