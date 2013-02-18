@@ -164,28 +164,21 @@ void client_init(char type, char* inputfile, char* outputfile){
     int rc;
     if(type == 'e'){
         //no need to lock started because it is not being used for any conditions
-        if ((c = client_create(started++)) )  {
-            rc = pthread_create(&(c->thread),&attr, client_run,(void *)c);
-            if (rc) {
-                 fprintf(stderr,"ERROR; return code from pthread_create() is %d\n", rc);
-                 exit(-1);
-             }
-        }
+        c = client_create(started++);
     }else if(type == 'E'){
         started++;
-        if ((c = client_create_no_window(inputfile, outputfile)) )  {
-            if(c == NULL) {
-                fprintf(stderr,"ERROR: automated client could not be created");
-                exit(-1);
-            }
-            rc = pthread_create(&(c->thread),&attr, client_run,(void *)c);
-            if (rc) {
-                 fprintf(stderr,"ERROR; return code from pthread_create() is %d\n", rc);
-                 exit(-1);
-             }
-        }
-
+        c = client_create_no_window(inputfile, outputfile);
     }
+    if(c == NULL) {
+                fprintf(stderr,"ERROR: client could not be created");
+                exit(-1);
+    }
+    rc = pthread_create(&(c->thread),&attr, client_run,(void *)c);
+    if (rc) {
+        fprintf(stderr,"ERROR; return code from pthread_create() is %d\n", rc);
+        exit(-1);
+    }
+
     stackInsert(c);
     pthread_attr_destroy(&attr);
     return;
@@ -194,10 +187,12 @@ void client_init(char type, char* inputfile, char* outputfile){
 void stop_all_clients(){
     pthread_mutex_lock(&perm_mutex);
     permission = 0;
+    pthread_mutex_unlock(&perm_mutex);
     return; 
 } 
 
 void allow_all_clients(){
+    pthread_mutex_unlock(&perm_mutex);
     permission = 1;
     pthread_cond_broadcast(&perm_given_cv);
     pthread_mutex_unlock(&perm_mutex);
