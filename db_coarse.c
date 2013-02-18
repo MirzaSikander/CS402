@@ -9,6 +9,8 @@
 node_t *search(char *, node_t *, node_t **);
 
 node_t head = { "", "", 0, 0 };
+
+pthread_mutex_t dbAccess_mutex = PTHREAD_MUTEX_INITIALIZER;
 /*
  * Allocate a new node with the given key, value and children.
  */
@@ -25,8 +27,6 @@ node_t *node_create(char *arg_name, char *arg_value, node_t * arg_left,
     }
 
     if (!(new_node->value = (char *)malloc(strlen(arg_value) + 1))) {
-	free(new_node->name);
-	free(new_node);
 	return NULL;
     }
 
@@ -209,8 +209,9 @@ node_t *search(char *name, node_t * parent, node_t ** parentpp) {
  * a string describing the results.  Response must be a writable string that
  * can hold len characters.  The response is stored in response.
  */
-void interpret_command(char *command, char *response, int len)
+void interpret_command_original(char *command, char *response, int len)
 {
+
     char value[256];
     char ibuf[256];
     char name[256];
@@ -283,7 +284,7 @@ void interpret_command(char *command, char *response, int len)
 		return;
 	    }
 	    while (fgets(ibuf, sizeof(ibuf), finput) != 0) {
-		interpret_command(ibuf, response, len);
+		interpret_command_original(ibuf, response, len);
 	    }
 	    fclose(finput);
 	}
@@ -294,4 +295,14 @@ void interpret_command(char *command, char *response, int len)
 	strncpy(response, "ill-formed command", len - 1);
 	return;
     }
+}
+
+void interpret_command(char *command, char *response, int len){
+    pthread_mutex_lock(&dbAccess_mutex);
+    interpret_command_original(command, response, len);
+    pthread_mutex_unlock(&dbAccess_mutex);
+}
+
+void destroyDBMutex(){
+    pthread_mutex_destroy(&dbAccess_mutex);
 }

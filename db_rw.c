@@ -5,8 +5,13 @@
 #include <stdio.h>
 #include <assert.h>
 
+pthread_mutex_t r_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t  waitOnR_cv = PTHREAD_COND_INITIALIZER;
+int readers_count = 0;
+pthread_mutex_t w_mutex = PTHREAD_MUTEX_INITIALIZER;
 /* Forward declaration */
 node_t *search(char *, node_t *, node_t **);
+
 
 node_t head = { "", "", 0, 0 };
 /*
@@ -204,6 +209,46 @@ node_t *search(char *name, node_t * parent, node_t ** parentpp) {
     return (result);
 }
 
+void EnterAsReader(){
+    
+    pthread_mutex_lock(&w_mutex);
+    pthread_mutex_unlock(&w_mutex);
+    
+    pthread_mutex_lock(&r_mutex);
+    readers_count++;
+    pthread_mutex_unlock(&r_mutex);
+    return;
+}
+
+void LeaveAsReader(){
+    pthread_mutex_lock(&r_mutex);
+    readers_count--;
+
+    if(readers_count == 0){
+        pthread_cond_broadcast(&waitOnR_cv);
+    }
+    pthread_mutex_unlock(&r_mutex);
+    return;
+}
+
+void EnterAsWriter(){
+    for(;;){
+        pthread_mutex_lock(&w_mutex);
+        pthread_mutex_lock(&r_mutex);
+        if(readers_count > 0){
+            pthread_mutex_unlock(&w_mutex);
+            pthread_cond_wait(&waitOnR_cv, &r_mutex);
+            pthread_mutex_unlock(&r_mutex);
+            continue;
+        }
+        pthread_mutex_unlock(&r_mutex);
+        break;
+    }
+}
+
+void LeaveAsWriter(){
+    pthread_mutex_unlock(&w_mutex);
+}
 /*
  * Parse the command in command, execute it on the DB rooted at head and return
  * a string describing the results.  Response must be a writable string that
@@ -222,76 +267,88 @@ void interpret_command(char *command, char *response, int len)
 
     switch (command[0]) {
     case 'q':
-	/* Query */
-	sscanf(&command[1], "%255s", name);
-	if (strlen(name) == 0) {
-	    strncpy(response, "ill-formed command", len - 1);
-	    return;
-	}
+        /* Query */
+        sscanf(&command[1], "%255s", name);
+        if (strlen(name) == 0) {
+            strncpy(response, "ill-formed command", len - 1);
+            return;
+        }
+        EnterAsReader();
+        query(name, response, len);
+        LeaveAsReader();
 
-	query(name, response, len);
-	if (strlen(response) == 0) {
-	    strncpy(response, "not found", len - 1);
-	}
+        if (strlen(response) == 0) {
+            strncpy(response, "not found", len - 1);
+        }
 
 	return;
 
     case 'a':
-	/* Add to the database */
-	sscanf(&command[1], "%255s %255s", name, value);
-	if ((strlen(name) == 0) || (strlen(value) == 0)) {
-	    strncpy(response, "ill-formed command", len - 1);
-	    return;
-	}
+        /* Add to the database */
+        sscanf(&command[1], "%255s %255s", name, value);
+        if ((strlen(name) == 0) || (strlen(value) == 0)) {
+            strncpy(response, "ill-formed command", len - 1);
+            return;
+        }
 
-	if (add(name, value)) {
-	    strncpy(response, "added", len - 1);
-	} else {
-	    strncpy(response, "already in database", len - 1);
-	}
+        EnterAsWriter();
+        if (add(name, value)) {
+            strncpy(response, "added", len - 1);
+        } else {
+            strncpy(response, "already in database", len - 1);
+        }
+        LeaveAsWriter();
 
 	return;
 
     case 'd':
-	/* Delete from the database */
-	sscanf(&command[1], "%255s", name);
-	if (strlen(name) == 0) {
-	    strncpy(response, "ill-formed command", len - 1);
-	    return;
-	}
+        /* Delete from the database */
+        sscanf(&command[1], "%255s", name);
+        if (strlen(name) == 0) {
+            strncpy(response, "ill-formed command", len - 1);
+            return;
+        }
 
-	if (xremove(name)) {
-	    strncpy(response, "removed", len - 1);
-	} else {
-	    strncpy(response, "not in database", len - 1);
-	}
+        EnterAsWriter();
+        if (xremove(name)) {
+            strncpy(response, "removed", len - 1);
+        } else {
+            strncpy(response, "not in database", len - 1);
+        }
+        LeaveAsWriter();
 
-	    return;
+    return;
 
     case 'f':
-	/* process the commands in a file (silently) */
-	sscanf(&command[1], "%255s", name);
-	if (name[0] == '\0') {
-	    strncpy(response, "ill-formed command", len - 1);
-	    return;
-	}
+        /* process the commands in a file (silently) */
+        sscanf(&command[1], "%255s", name);
+        if (name[0] == '\0') {
+            strncpy(response, "ill-formed command", len - 1);
+            return;
+        }
 
-	{
-	    FILE *finput = fopen(name, "r");
-	    if (!finput) {
-		strncpy(response, "bad file name", len - 1);
-		return;
-	    }
-	    while (fgets(ibuf, sizeof(ibuf), finput) != 0) {
-		interpret_command(ibuf, response, len);
-	    }
-	    fclose(finput);
-	}
-	strncpy(response, "file processed", len - 1);
+        {
+            FILE *finput = fopen(name, "r");
+            if (!finput) {
+            strncpy(response, "bad file name", len - 1);
+            return;
+            }
+            while (fgets(ibuf, sizeof(ibuf), finput) != 0) {
+            interpret_command(ibuf, response, len);
+            }
+            fclose(finput);
+        }
+        strncpy(response, "file processed", len - 1);
 	return;
 
     default:
 	strncpy(response, "ill-formed command", len - 1);
 	return;
     }
+}
+
+void destroyDBMutex(){
+    pthread_mutex_destroy(&r_mutex);
+    pthread_cond_destroy(&waitOnR_cv);
+    pthread_mutex_destroy(&w_mutex);
 }
