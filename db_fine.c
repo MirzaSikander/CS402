@@ -1,4 +1,4 @@
-#include "db.h"
+#include "db_fine.h"
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
@@ -8,7 +8,62 @@
 /* Forward declaration */
 node_t *search(char *, node_t *, node_t **);
 
-node_t head = { "", "", 0, 0 };
+node_t head = { "",
+                "",
+                0,
+                0,
+                PTHREAD_MUTEX_INITIALIZER,
+                PTHREAD_COND_INITIALIZER,
+                0,
+                PTHREAD_MUTEX_INITIALIZER
+};
+
+void EnterAsReader(node_t* node){
+    if(node != NULL){ 
+        pthread_mutex_lock(&(node->w_mutex));
+        pthread_mutex_unlock(&(node->w_mutex));
+
+        pthread_mutex_lock(&(node->r_mutex));
+        node->readers_count++;
+        pthread_mutex_unlock(&(node->r_mutex));
+    }
+    return;
+}
+
+void LeaveAsReader(node_t* node){
+    if(node != NULL){
+        pthread_mutex_lock(&(node->r_mutex)); node->readers_count--; 
+        if(node->readers_count == 0){
+            pthread_cond_broadcast(&(node->waitOnR_cv));
+        }
+        pthread_mutex_unlock(&(node->r_mutex));
+    }
+    return;
+}
+
+void EnterAsWriter(node_t* node){
+    if(node != NULL){
+        for(;;){
+            pthread_mutex_lock(&(node->w_mutex));
+            pthread_mutex_lock(&(node->r_mutex));
+            if(node->readers_count > 0){
+                pthread_mutex_unlock(&(node->w_mutex));
+                pthread_cond_wait(&(node->waitOnR_cv), &(node->r_mutex));
+                pthread_mutex_unlock(&(node->r_mutex));
+                continue;
+            }
+            pthread_mutex_unlock(&(node->r_mutex));
+            break;
+        }
+    }
+    return;
+}
+
+void LeaveAsWriter(node_t* node){
+    if(node != NULL)
+    pthread_mutex_unlock(&(node->w_mutex));
+    return;
+}
 /*
  * Allocate a new node with the given key, value and children.
  */
@@ -34,7 +89,11 @@ node_t *node_create(char *arg_name, char *arg_value, node_t * arg_left,
     strcpy(new_node->value, arg_value);
     new_node->lchild = arg_left;
     new_node->rchild = arg_right;
-    
+    //initializing the locking mechanism 
+    pthread_mutex_init(&(new_node->r_mutex), NULL);
+    pthread_mutex_init(&(new_node->w_mutex),NULL);
+    pthread_cond_init(&(new_node->waitOnR_cv), NULL);
+    new_node->readers_count = 0;
     return new_node;
 }
 
@@ -44,6 +103,9 @@ void node_destroy(node_t * node) {
      * case the node_destroy is called again. */
     if (node->name) {free(node->name); node->name = NULL; }
     if (node->value) { free(node->value); node->value = NULL; }
+    pthread_mutex_destroy(&node->r_mutex);
+    pthread_mutex_destroy(&node->w_mutex);
+    pthread_cond_destroy(&node->waitOnR_cv);
     free(node);
 }
 
@@ -51,15 +113,20 @@ void node_destroy(node_t * node) {
  * Result must have space for len characters. */
 void query(char *name, char *result, int len) {
     node_t *target;
-
+    //need to lock head before sending it as a argument to search
+    EnterAsReader(&head);
+    //target came already locked if it is not null
     target = search(name, &head, NULL);
 
     if (!target) {
-	strncpy(result, "not found", len - 1);
-	return;
+        //target is null so no need to unlock it
+        strncpy(result, "not found", len - 1);
+        return;
     } else {
-	strncpy(result, target->value, len - 1);
-	return;
+        //target needs to be unlocked
+        strncpy(result, target->value, len - 1);
+        LeaveAsReader(target);
+        return;
     }
 }
 
@@ -69,21 +136,26 @@ int add(char *name, char *value) {
 	node_t *parent;	    /* The new node will be the child of this node */
 	node_t *target;	    /* The existing node with key name if any */
 	node_t *newnode;    /* The new node to add */
-
+    //need to lock head before sending it in
+    EnterAsWriter(&head);
 	if ((target = search(name, &head, &parent))) {
 	    /* There is already a node with this key in the tree */
+        //target and parent are already locked so need to unlock it before returning
+        LeaveAsWriter(target);
+        LeaveAsWriter(parent);
 	    return 0;
 	}
-
 	/* No idea how this could happen, but... */
 	if (!parent) return 0;
 
+    //parent is locked as a reader
 	/* make the new node and attach it to parent */
 	newnode = node_create(name, value, 0, 0);
 
 	if (strcmp(name, parent->name) < 0) parent->lchild = newnode;
 	else parent->rchild = newnode;
-
+    
+    LeaveAsWriter(parent);
 	return 1;
 }
 
@@ -108,10 +180,14 @@ int xremove(char *name) {
 	node_t *next;	    /* used to find leftmost child of right subtree */
 	node_t **pnext;	    /* A pointer in the tree that points to next so we
 			       can change that nodes children (see below). */
-
+    //Need to lock the head node before searching
+    EnterAsWriter(&head);
 	/* first, find the node to be removed */
 	if (!(dnode = search(name, &head, &parent))) {
 	    /* it's not there */
+        //dnode and parent will be locked when the function returns
+        LeaveAsWriter(dnode);
+        LeaveAsWriter(parent);
 	    return 0;
 	}
 
@@ -125,6 +201,7 @@ int xremove(char *name) {
 		parent->rchild = dnode->lchild;
 
 	    /* done with dnode */
+        //no need to unlock the writers lock on dnode since nobody will be waiting on it. 
 	    node_destroy(dnode);
 	} else if (dnode->lchild == 0) {
 	    /* ditto if the node had no left child */
@@ -149,20 +226,29 @@ int xremove(char *name) {
 
 	    /* pnext is the address of the pointer which points to next (either
 	     * parent's lchild or rchild) */
+
+        EnterAsWriter(dnode->rchild);
 	    pnext = &dnode->rchild;
 	    next = *pnext;
+        EnterAsWriter(next->lchild);
+        LeaveAsWriter(dnode->rchild);
 	    while (next->lchild != 0) {
 		    /* work our way down the lchild chain, finding the smallest
 		     * node in the subtree. */
 		    pnext = &next->lchild;
+            LeaveAsWriter(next);
 		    next = *pnext;
+            EnterAsWriter(next->lchild);
 	    }
 	    swap_pointers(&dnode->name, &next->name);
 	    swap_pointers(&dnode->value, &next->value);
 	    *pnext = next->rchild;
+        LeaveAsWriter(next);
 
 	    node_destroy(next);
     }
+    LeaveAsWriter(dnode);
+    LeaveAsWriter(parent);
     return 1;
 }
 
@@ -174,32 +260,51 @@ int xremove(char *name) {
  * the parent of the target node, if it were there.
  *
  * Assumptions:
- * parent is not null and it does not contain name */
+ * parent node is reader locked, is not null and does not contain name */
 node_t *search(char *name, node_t * parent, node_t ** parentpp) {
-
+    //assumption that parent is readerlocked so that it cannot be modified while its being used
     node_t *next;
     node_t *result;
-
+    
     if (strcmp(name, parent->name) < 0) next = parent->lchild;
     else next = parent->rchild;
+    
+    //lock the child which is going to be used later
+    if (parentpp != 0)
+        EnterAsWriter(next);
+    else
+        EnterAsReader(next);
 
     if (next == NULL) {
-	result = NULL;
+        result = NULL;
     } else {
-	if (strcmp(name, next->name) == 0) {
-	    /* Note that this falls through to the if (parentpp .. ) statement
-	     * below. */
-	    result = next;
-	} else {
-	    /* "We have to go deeper!" This recurses and returns from here
-	     * after the recursion has returned result and set parentpp */
-	    result = search(name, next, parentpp);
-	    return result;
-	}
+        if (strcmp(name, next->name) == 0) {
+            /* Note that this falls through to the if (parentpp .. ) statement
+             * below. */
+            result = next;
+        } else {
+            /* "We have to go deeper!" This recurses and returns from here
+             * after the recursion has returned result and set parentpp 
+             * next is locked going in*/
+            
+            //let go of the parent since there is no interaction with it any longer
+            if (parentpp != 0)
+                LeaveAsWriter(parent);
+            else
+                LeaveAsReader(parent);
+
+            result = search(name, next, parentpp);
+            return result;
+        }
     }
 
     /* record a parent if we are looking for one */
+    //parent and result are already locked
+    //Need to unlock the parent if it is not required
     if (parentpp != 0) *parentpp = parent;
+    else{
+        LeaveAsReader(parent);
+    }
 
     return (result);
 }
@@ -294,4 +399,7 @@ void interpret_command(char *command, char *response, int len)
 	strncpy(response, "ill-formed command", len - 1);
 	return;
     }
+}
+
+void destroyDBMutex(){
 }
