@@ -124,6 +124,24 @@ void *client_run(void *arg)
     pthread_exit(NULL);
 }
 
+void *client_run_dbInit(void *arg)
+{
+
+	client_t *client = (client_t *) arg;
+
+	/* main loop of the client: fetch commands from window, interpret
+	 * and handle them, return results to window. */
+	char *command = 0;
+	size_t clen = 0;
+	/* response must be empty for the first call to serve */
+	char response[256] = { 0 };
+
+	/* Serve until the other side closes the pipe */
+	while (serve(client->win, response, &command, &clen) != -1) {
+	    handle_command(command, response, sizeof(response));
+	}
+    return;
+}
 int handle_command(char *command, char *response, int len) {
     if (command[0] == EOF) {
 	strncpy(response, "all done", len - 1);
@@ -170,15 +188,19 @@ void client_init(char type, char* inputfile, char* outputfile){
         c = client_create_no_window(inputfile, outputfile);
     }
     if(c == NULL) {
-                fprintf(stderr,"ERROR: client could not be created");
-                exit(-1);
+        fprintf(stderr,"ERROR: client could not be created");
+        return;
     }
     rc = pthread_create(&(c->thread),&attr, client_run,(void *)c);
     if (rc) {
         fprintf(stderr,"ERROR; return code from pthread_create() is %d\n", rc);
         exit(-1);
     }
-
+    if(type == 'e'){
+        fprintf(stdout, "Created a new interactive client \n");
+    }else if(type == 'E'){
+        fprintf(stdout, "Created a new automated client \n");
+    }
     stackInsert(c);
     pthread_attr_destroy(&attr);
     return;
@@ -186,14 +208,23 @@ void client_init(char type, char* inputfile, char* outputfile){
 
 void stop_all_clients(){
     pthread_mutex_lock(&perm_mutex);
-    permission = 0;
+    if(permission){
+        permission = 0;
+        fprintf(stdout, "Stopped all clients\n");
+    }else{
+        fprintf(stdout, "Clients were already stopped. This command had no effect\n");
+    }
     pthread_mutex_unlock(&perm_mutex);
     return; 
 } 
 
 void allow_all_clients(){
     pthread_mutex_unlock(&perm_mutex);
-    permission = 1;
+    if(!permission){
+        fprintf(stdout, "Clients have now started\n");
+        permission = 1;
+    }else
+        fprintf(stdout, "Clients are already executing\n");
     pthread_cond_broadcast(&perm_given_cv);
     pthread_mutex_unlock(&perm_mutex);
     return;
@@ -225,45 +256,48 @@ int main(int argc, char *argv[]) {
     pthread_cond_init (&perm_given_cv, NULL);
     permission = 0;// denied by default
 
-    if (argc != 1) {
-	fprintf(stderr, "Usage: server\n");
-	exit(1);
-    }
+    time_t startTime;
+    time_t endTime;
+
+    char* timeFile;
+    timeFile = argv[1]; 
 
     char c;
     for(;;){ 
         printf(">");
         scanf("%c",&c);
-        if(c == 'e'){
+        if(c == 'i'){
+            int temp_perm = permission;
+            permission = 0;
+            char input[4096];
+            char output[4096];
+            scanf("%s",input); 
+            scanf("%s",output);
+            client_t* c = client_create_no_window(input, output);
+            if(c == NULL){
+               printf( "INVALID FILENAMEs, db could not be initialized");
+            }else{
+                printf("DB initialized");
+                client_run_dbInit(c);
+                client_destroy(c);
+            }               
+            permission = temp_perm;
+        }else if(c == 'e'){
             client_init(c,NULL,NULL);
-            fprintf(stdout, "Created a new interactive client \n");
         }else if(c == 'E'){
             char input[4096];
             char output[4096];
             scanf("%s",input); 
             scanf("%s",output);
             client_init(c,input,output);
-            fprintf(stdout, "Created a new automated client \n");
         }else if(c == 's'){
-            if(permission){
-                stop_all_clients();
-                fprintf(stdout, "Stopped all clients\n");
-            }else{
-                fprintf(stdout, "Clients were already stopped. This command had no effect\n");
-            }
+            stop_all_clients();
         }else if(c == 'g'){
-            if(!permission){
-                allow_all_clients();
-                fprintf(stdout, "Clients have now started\n");
-            }else
-                fprintf(stdout, "Clients are already executing\n");
+            allow_all_clients();
         }else if(c == 'w'){
-             if(!permission){
-                allow_all_clients();
-                fprintf(stdout, "Clients have now started\n");
-            }else
-                fprintf(stdout, "Clients are already executing\n");
+            allow_all_clients();
             fprintf(stdout, "Wrapping up. No more commands will be taken now\n");
+            time(&startTime);
             break;
         }else{
             printf("WRONG INPUT. PLEASE CHOOSE FROM e E s g w");
@@ -272,8 +306,17 @@ int main(int argc, char *argv[]) {
     }
     server_wait_for_clients(); 
     fprintf(stderr, "Terminating.\n");
+    time(&endTime);
+    double seconds = difftime(endTime,startTime);
+    printf("Finished Executing in %f\n",seconds);
+    if(timeFile){
+        FILE* fp;
+        fp = fopen(timeFile,"a");
+        fprintf(fp, "%f\n",seconds);
+    }
     /* Clean up the window data */
     window_cleanup();
+    destroyDBMutex();
     pthread_mutex_destroy(&perm_mutex);
     pthread_cond_destroy(&perm_given_cv);
     pthread_exit(NULL);

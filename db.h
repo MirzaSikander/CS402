@@ -10,3 +10,5 @@ typedef struct Node {
 extern node_t head;
 
 void interpret_command(char *, char *, int);
+
+void destroyDBMutex();
