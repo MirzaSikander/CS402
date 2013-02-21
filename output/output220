@@ -11,9 +11,9 @@ removed
 >> q uterine
 uterine
 >> q eximietate
-eximietate
->> q pigment
 not found
+>> q pigment
+pigment
 >> a cervus cervus
 already in database
 >> a (as (as
@@ -51,7 +51,7 @@ removed
 >> a blame, blame,
 already in database
 >> d thuggish
-not in database
+removed
 >> a swelter swelter
 already in database
 >> a fondue fondue
@@ -67,7 +67,7 @@ already in database
 >> d revengefully
 removed
 >> q crikey
-not found
+crikey
 >> d capio
 removed
 >> q tergiversatio
@@ -75,7 +75,7 @@ tergiversatio
 >> d preenhancement
 removed
 >> d proceed,
-not in database
+removed
 >> q dismiss,
 dismiss,
 >> q astronavigators
@@ -87,7 +87,7 @@ removed
 >> q comitatus
 comitatus
 >> d undoubtedly,
-not in database
+removed
 >> d purgo
 removed
 >> d carver
@@ -119,7 +119,7 @@ totidem
 >> d choose,
 removed
 >> q enriched
-enriched
+not found
 >> d leanne
 removed
 >> a denby denby
@@ -143,15 +143,15 @@ already in database
 >> q render
 render
 >> q asterix
-not found
+asterix
 >> a severe, severe,
-already in database
+added
 >> a garble garble
 already in database
 >> d public
 removed
 >> q weightlifters
-not found
+weightlifters
 >> q dizzying
 dizzying
 >> q rechartered
@@ -159,7 +159,7 @@ rechartered
 >> q deity),
 deity),
 >> d singular:
-not in database
+removed
 >> d vanuatu
 removed
 >> a /scouring /scouring
@@ -169,7 +169,7 @@ news
 >> q circumstances.
 circumstances.
 >> d contamino
-removed
+not in database
 >> q admonitory
 admonitory
 >> a legio legio
@@ -177,7 +177,7 @@ already in database
 >> a hill hill
 already in database
 >> a perfectum: perfectum:
-already in database
+added
 >> q pall-bearer,
 pall-bearer,
 >> a decet decet
@@ -197,13 +197,13 @@ already in database
 >> d uncomputed
 removed
 >> a defoe defoe
-added
+already in database
 >> a forbidding. forbidding.
 already in database
 >> a sophistications sophistications
 already in database
 >> a barring barring
-already in database
+added
 >> q astronautically
 astronautically
 >> a tergiversatio tergiversatio
@@ -255,17 +255,17 @@ ass
 >> a darwin darwin
 already in database
 >> d garnered
-removed
+not in database
 >> a monza monza
-added
+already in database
 >> d populariser
-removed
+not in database
 >> a broqueroi. broqueroi.
 already in database
 >> d unprevious
 removed
 >> q trivia
-trivia
+not found
 >> d feelers
 removed
 >> q fitting.
@@ -273,7 +273,7 @@ fitting.
 >> q satan.
 satan.
 >> a depth, depth,
-already in database
+added
 >> q reagan
 reagan
 >> a backsides backsides
@@ -281,7 +281,7 @@ already in database
 >> d tractable
 removed
 >> a soon, soon,
-already in database
+added
 >> d illusum
 removed
 >> q acquisitively
@@ -303,7 +303,7 @@ removed
 >> d undisplayable
 removed
 >> q gigantic
-gigantic
+not found
 >> d barnard
 removed
 >> a reacquisition reacquisition
@@ -315,7 +315,7 @@ removed
 >> q esperanto
 esperanto
 >> a appono appono
-already in database
+added
 >> q faye
 faye
 >> q aisles
@@ -323,13 +323,13 @@ aisles
 >> a rob, rob,
 already in database
 >> d zone
-removed
+not in database
 >> q anchoring
 anchoring
 >> d sullied
-not in database
+removed
 >> a it. it.
-already in database
+added
 >> q carbonate
 carbonate
 >> q arch
@@ -349,7 +349,7 @@ blandly
 >> d blows,
 removed
 >> d annual
-removed
+not in database
 >> q georgetown
 georgetown
 >> a tributed tributed
@@ -361,17 +361,17 @@ already in database
 >> q renumberings
 renumberings
 >> q nominator
-not found
+nominator
 >> d baskets
 removed
 >> q unpushingly
-unpushingly
+not found
 >> d youngsters
 removed
 >> d watcom
 not in database
 >> d iustus
-removed
+not in database
 >> q tuesday
 tuesday
 >> q blagged
@@ -391,7 +391,7 @@ cumbrian
 >> a carbonated carbonated
 already in database
 >> d angus
-not in database
+removed
 >> q bjork
 bjork
 >> a timmy timmy
@@ -401,19 +401,19 @@ already in database
 >> d independence
 removed
 >> d animating
-removed
+not in database
 >> a finlay finlay
 already in database
 >> d pejorative.
 removed
 >> d /inflame,
-not in database
+removed
 >> a spreading spreading
 already in database
 >> a cyberslacking cyberslacking
 already in database
 >> a careo careo
-added
+already in database
 >> q reinterpreting
 reinterpreting
 >> a accounting accounting
@@ -423,15 +423,15 @@ already in database
 >> d falcis
 not in database
 >> a indigestible indigestible
-already in database
+added
 >> d capella
 removed
 >> a yak yak
 already in database
 >> a famous, famous,
-already in database
->> a velox velox
 added
+>> a velox velox
+already in database
 >> d non
 removed
 >> q sweepings.
@@ -449,7 +449,7 @@ removed
 >> d joust
 removed
 >> d earth.
-removed
+not in database
 >> q cell.
 cell.
 >> d congregated
@@ -485,7 +485,7 @@ indiscoverable
 >> a lamenting. lamenting.
 already in database
 >> a namely, namely,
-already in database
+added
 >> q fangled
 fangled
 >> d werumensium
@@ -509,17 +509,17 @@ already in database
 >> d aloft.
 not in database
 >> a beauty, beauty,
-added
+already in database
 >> q misrouting
 misrouting
 >> d lose.
 removed
 >> a revisitation revisitation
-already in database
+added
 >> q meteorologic
 meteorologic
 >> d occasum
-removed
+not in database
 >> d woolwich
 removed
 >> q bequeathable
@@ -535,13 +535,13 @@ already in database
 >> d dolby
 removed
 >> d consilio
-removed
+not in database
 >> d wain.
 removed
 >> d dismissive
 removed
 >> d etruscan
-removed
+not in database
 >> a breadthless breadthless
 already in database
 >> a probably. probably.
@@ -563,9 +563,9 @@ acumen
 >> a unshakably unshakably
 already in database
 >> a prepare, prepare,
-already in database
->> a spineless spineless
 added
+>> a spineless spineless
+already in database
 >> q adidas
 adidas
 >> d royal,
@@ -575,7 +575,7 @@ already in database
 >> q bolivia
 bolivia
 >> q stripe.
-stripe.
+not found
 >> a dative). dative).
 added
 >> a party party
@@ -583,13 +583,13 @@ already in database
 >> a traditionalized traditionalized
 already in database
 >> d goodbyes
-removed
+not in database
 >> q days.
 days.
 >> d ours
 removed
 >> d carve
-removed
+not in database
 >> d assentator
 removed
 >> d /saint.
@@ -601,7 +601,7 @@ already in database
 >> d armory
 removed
 >> d mandelbrots
-removed
+not in database
 >> d breads
 removed
 >> a worthing worthing
@@ -625,7 +625,7 @@ already in database
 >> q vituperatively
 vituperatively
 >> q praeter
-praeter
+not found
 >> d indicate,
 removed
 >> q woodburning
@@ -661,7 +661,7 @@ libation.
 >> d cunabula
 removed
 >> a makes makes
-already in database
+added
 >> a apple apple
 already in database
 >> q affected.
@@ -673,27 +673,27 @@ removed
 >> a m: m:
 already in database
 >> q gauging
-gauging
+not found
 >> q crowds.
 crowds.
 >> a imbue. imbue.
 already in database
 >> q reinquiry
-not found
+reinquiry
 >> d laceration
-removed
+not in database
 >> a partaked partaked
-already in database
+added
 >> q perspicuus
-perspicuus
+not found
 >> d shower.
-removed
+not in database
 >> a sensed sensed
 added
 >> q tohether,
-tohether,
+not found
 >> d monastic
-removed
+not in database
 >> d bards
 removed
 >> q dignity.
@@ -703,7 +703,7 @@ removed
 >> d percussionists
 removed
 >> d cyanides
-removed
+not in database
 >> a unparse unparse
 already in database
 >> d dolor
@@ -717,7 +717,7 @@ ae
 >> d copperpot
 removed
 >> a macroscopic macroscopic
-already in database
+added
 >> a givenchy givenchy
 already in database
 >> a favorer, favorer,
@@ -745,7 +745,7 @@ not found
 >> q loosest
 loosest
 >> a advanced advanced
-already in database
+added
 >> d virge
 removed
 >> a preproduce preproduce
@@ -753,7 +753,7 @@ already in database
 >> d nasturtiums
 removed
 >> q half.
-half.
+not found
 >> q start
 start
 >> d thing,/
@@ -773,7 +773,7 @@ rosemeyer
 >> d suspension
 removed
 >> q little/not
-little/not
+not found
 >> q retreat.
 retreat.
 >> q umerus
@@ -781,9 +781,9 @@ umerus
 >> q cider
 cider
 >> d to
-not in database
+removed
 >> q abed
-not found
+abed
 >> a dimidium dimidium
 already in database
 >> q gussets
@@ -793,13 +793,13 @@ removed
 >> d aggressor
 removed
 >> d polymorph
-removed
+not in database
 >> q waltons
 waltons
 >> a unlaced unlaced
 already in database
 >> q assume,
-assume,
+not found
 >> q chide,
 chide,
 >> d bugatti
@@ -819,7 +819,7 @@ already in database
 >> a bassist bassist
 already in database
 >> q leakproof
-leakproof
+not found
 >> a eloquent, eloquent,
 already in database
 >> a stinginess. stinginess.
@@ -827,7 +827,7 @@ already in database
 >> d act
 removed
 >> a clambered clambered
-already in database
+added
 >> a dwayne dwayne
 already in database
 >> q insular
@@ -835,7 +835,7 @@ insular
 >> q tinge,
 tinge,
 >> a /reason, /reason,
-already in database
+added
 >> a pulmentum pulmentum
 already in database
 >> q thetans
@@ -845,7 +845,7 @@ removed
 >> a ploro ploro
 already in database
 >> q apparently
-apparently
+not found
 >> q pretergredior
 pretergredior
 >> d suasoria
@@ -855,7 +855,7 @@ removed
 >> d gnutella
 removed
 >> d beecham
-removed
+not in database
 >> a propono propono
 already in database
 >> d substring
@@ -879,7 +879,7 @@ already in database
 >> d insontis
 removed
 >> q yellow
-yellow
+not found
 >> q withdraw.
 withdraw.
 >> q delia
@@ -889,9 +889,9 @@ redescribed
 >> q rullion
 rullion
 >> q host.
-host.
+not found
 >> q analytic
-analytic
+not found
 >> a silage silage
 already in database
 >> q beatlemania
@@ -899,21 +899,21 @@ not found
 >> q passages
 passages
 >> a emperor. emperor.
-already in database
+added
 >> q altar
 altar
 >> a gless gless
-already in database
+added
 >> q gathering
-not found
+gathering
 >> a calamity, calamity,
-already in database
+added
 >> d course.
-removed
+not in database
 >> d multifrequency
-removed
+not in database
 >> q adaptor
-adaptor
+not found
 >> q ripe
 ripe
 >> q wondering
@@ -923,7 +923,7 @@ coruscus
 >> a comesum comesum
 already in database
 >> a descent, descent,
-already in database
+added
 >> a maternal maternal
 already in database
 >> q taffeta
@@ -935,23 +935,23 @@ filth.
 >> q inactivity.
 inactivity.
 >> d headboard
-removed
+not in database
 >> a knows knows
-already in database
+added
 >> a mongolian mongolian
-already in database
+added
 >> a mozambique mozambique
 already in database
 >> d recent.
-not in database
+removed
 >> q matera,
 matera,
 >> q (ironically)
 (ironically)
 >> q breasts
-breasts
+not found
 >> d exile,
-removed
+not in database
 >> q pictor
 pictor
 >> q blandishments,
@@ -979,13 +979,13 @@ not in database
 >> q andries
 andries
 >> a arise. arise.
-already in database
+added
 >> d that
 not in database
 >> d hispaniola
 removed
 >> q allies
-allies
+not found
 >> a lille. lille.
 already in database
 >> a protection protection
@@ -993,17 +993,17 @@ already in database
 >> d swop
 removed
 >> q mindscape
-mindscape
+not found
 >> q fultus
 fultus
 >> d appropriately,
-removed
+not in database
 >> a mephistopheles mephistopheles
-already in database
+added
 >> d plow.
 removed
 >> a itero itero
-already in database
+added
 >> a these these
 added
 >> d adulated
@@ -1019,11 +1019,11 @@ removed
 >> a parities parities
 already in database
 >> d theme.
-removed
->> a categorisation categorisation
-already in database
->> d virge
 not in database
+>> a categorisation categorisation
+added
+>> d virge
+removed
 >> a center center
 already in database
 >> d carry,
@@ -1033,7 +1033,7 @@ not in database
 >> q baltic
 baltic
 >> d nepotis
-removed
+not in database
 >> a lowly, lowly,
 already in database
 >> d presents.
@@ -1043,33 +1043,33 @@ already in database
 >> q disbands
 disbands
 >> d please.
-removed
+not in database
 >> q prepaid,
-prepaid,
+not found
 >> a waring waring
-already in database
+added
 >> d wiretaps
 removed
 >> d malus).
-removed
+not in database
 >> q premaritally
 premaritally
 >> a diffuse. diffuse.
-already in database
+added
 >> q winnington
 winnington
 >> q pulmo
-pulmo
+not found
 >> d pronouncement
-removed
+not in database
 >> a beet beet
 already in database
 >> a activism activism
 already in database
 >> d passivity
-not in database
+removed
 >> a accentuates accentuates
-already in database
+added
 >> d whined
 removed
 >> d dominion,
@@ -1079,13 +1079,13 @@ removed
 >> a oscillates oscillates
 already in database
 >> q yugoslav
-yugoslav
+not found
 >> a unroll unroll
 already in database
 >> d druggist
-removed
+not in database
 >> q hereafter.
-hereafter.
+not found
 >> q holy,
 holy,
 >> d aspicio
@@ -1097,15 +1097,15 @@ infossum
 >> d airliner
 removed
 >> a blockages blockages
-already in database
+added
 >> a unported unported
-already in database
+added
 >> a arch arch
-already in database
+added
 >> d herimann
-removed
+not in database
 >> d terabit
-removed
+not in database
 >> q ascribes
 ascribes
 >> d clearable
@@ -1115,31 +1115,31 @@ removed
 >> d alters
 removed
 >> a behemoths behemoths
-already in database
+added
 >> a yourself yourself
-already in database
+added
 >> d brittleness
 removed
 >> q discoverer.
 discoverer.
 >> a fugitive fugitive
-already in database
+added
 >> q montreal
 montreal
 >> q openly,
 openly,
 >> q expensiveness
-expensiveness
+not found
 >> q catch.
 catch.
 >> q bark
 bark
 >> q cuiusmodi
-cuiusmodi
+not found
 >> a lead, lead,
 already in database
 >> q comets
-comets
+not found
 >> d pessimus
 not in database
 >> d fingerprinted
@@ -1167,7 +1167,7 @@ already in database
 >> q arnault
 arnault
 >> a midlothian midlothian
-already in database
+added
 >> a cowdrey cowdrey
 already in database
 >> q revisitation
@@ -1175,17 +1175,17 @@ revisitation
 >> a other. other.
 already in database
 >> q briefly.
-briefly.
+not found
 >> a azrael azrael
 added
 >> q athelney
-athelney
+not found
 >> d snowy.
-removed
+not in database
 >> d leave
-removed
+not in database
 >> d claim,
-removed
+not in database
 >> a anniversary anniversary
 already in database
 >> d accordingly
@@ -1197,29 +1197,29 @@ already in database
 >> d management,
 removed
 >> a perversity. perversity.
-already in database
+added
 >> a brief. brief.
 already in database
 >> a digestor digestor
-added
+already in database
 >> q little.
 little.
 >> q kingdom,
-kingdom,
+not found
 >> a caseless caseless
-already in database
+added
 >> a ill, ill,
 already in database
 >> q alpha
 alpha
 >> q chorlton
-chorlton
+not found
 >> d iubeo
-removed
+not in database
 >> q pedis
 pedis
 >> q transputers
-transputers
+not found
 >> d blackpool
 removed
 >> d acc.,
@@ -1231,9 +1231,9 @@ added
 >> d yvonne
 removed
 >> a misassumption misassumption
-already in database
+added
 >> d blacken
-removed
+not in database
 >> d walters
 removed
 >> a allocators allocators
@@ -1243,7 +1243,7 @@ publish,
 >> a zen zen
 already in database
 >> d ea
-removed
+not in database
 >> d sinew
 removed
 >> d disagree
@@ -1261,11 +1261,11 @@ nepos
 >> d brave.
 removed
 >> q prex
-prex
+not found
 >> d baron
-removed
+not in database
 >> a advance advance
-already in database
+added
 >> q hendrix
 hendrix
 >> q tamen
@@ -1275,7 +1275,7 @@ increpo
 >> q forensis,
 forensis,
 >> a hermetically hermetically
-already in database
+added
 >> q boloniense
 boloniense
 >> q bochum
@@ -1285,27 +1285,27 @@ removed
 >> d think,
 removed
 >> a mow, mow,
-already in database
+added
 >> d bronx
 removed
 >> a zilch zilch
-already in database
+added
 >> d mindblowingly
-removed
+not in database
 >> q gandavum
 gandavum
 >> d hispaniola
-not in database
+removed
 >> q chesney
-chesney
+not found
 >> q bogging
-bogging
+not found
 >> a guardianship guardianship
 already in database
 >> a django django
 added
 >> q miserable.
-miserable.
+not found
 >> d marry
 not in database
 >> q descendant.
@@ -1321,27 +1321,27 @@ added
 >> q rubric
 rubric
 >> d lavish,
-removed
+not in database
 >> a monroe monroe
 already in database
 >> q nonliteral
 nonliteral
 >> a yells yells
-already in database
+added
 >> a autotuning autotuning
-already in database
+added
 >> d weiner
 removed
 >> q exit.
 exit.
 >> q suspendable
-suspendable
+not found
 >> a artless artless
 already in database
 >> q thalamus
-thalamus
+not found
 >> q exequor
-exequor
+not found
 >> q gay.
 gay.
 >> a substitute, substitute,
@@ -1349,7 +1349,7 @@ already in database
 >> a adverts adverts
 already in database
 >> d suitability,
-not in database
+removed
 >> d pirates
 removed
 >> q hasten
@@ -1359,19 +1359,19 @@ added
 >> d tutamen
 removed
 >> q whispered
-whispered
+not found
 >> q twelfth
-twelfth
+not found
 >> a attentively, attentively,
-already in database
+added
 >> q scalp
-scalp
+not found
 >> d genders
-removed
+not in database
 >> a survey. survey.
 already in database
 >> q admirals
-admirals
+not found
 >> q (see
 (see
 >> q congress.
@@ -1383,7 +1383,7 @@ dignus
 >> q abuses
 not found
 >> d weights
-removed
+not in database
 >> q /mob,
 /mob,
 >> a casting casting
@@ -1391,13 +1391,13 @@ already in database
 >> d appedices
 not in database
 >> d adopt,
-removed
+not in database
 >> q of
-not found
+of
 >> a bendings, bendings,
 already in database
 >> d divinus
-removed
+not in database
 >> a filth. filth.
 already in database
 >> a flanigan flanigan
@@ -1405,15 +1405,15 @@ already in database
 >> q bats
 bats
 >> d twips
-removed
+not in database
 >> a adulthood adulthood
-already in database
+added
 >> q ambushed
 ambushed
 >> q overcriticalness
-overcriticalness
+not found
 >> d distort.
-removed
+not in database
 >> d statelessness
 removed
 >> q djalili
@@ -1429,21 +1429,21 @@ ciminosus
 >> q delicately,
 not found
 >> q flowing,
-flowing,
+not found
 >> a weasel weasel
-already in database
+added
 >> q minui
 minui
 >> q gloria
-gloria
+not found
 >> q mei
 not found
 >> d male
 removed
 >> d curve
-removed
+not in database
 >> a promissor promissor
-already in database
+added
 >> q bogota
 bogota
 >> q creasing
@@ -1457,7 +1457,7 @@ removed
 >> q castling
 castling
 >> d slowly
-removed
+not in database
 >> d wakeham
 removed
 >> a custody. custody.
@@ -1471,39 +1471,39 @@ procurer,
 >> q greenspan
 greenspan
 >> d ventum
-not in database
+removed
 >> d wherefore?
 removed
 >> q aol
-aol
+not found
 >> q chamberlain.
 chamberlain.
 >> a /nature /nature
 already in database
 >> a progressio progressio
-already in database
+added
 >> d author,
-removed
+not in database
 >> d urbs
-removed
+not in database
 >> d daybreak.
 removed
 >> q ancestor.
-ancestor.
+not found
 >> d others.
 removed
 >> q http
 http
 >> a fawlty fawlty
-already in database
+added
 >> a commandeer commandeer
-already in database
+added
 >> d porro
-removed
+not in database
 >> d coelacanths
 removed
 >> a straight. straight.
-already in database
+added
 >> q voil,
 voil,
 >> q orders,
@@ -1511,31 +1511,31 @@ orders,
 >> d test
 removed
 >> d entreating,
-removed
+not in database
 >> q mitigate.
 mitigate.
 >> d want.
-removed
+not in database
 >> d countryman,
-removed
+not in database
 >> q jonsson
 jonsson
 >> a distinguish, distinguish,
 already in database
 >> a angel. angel.
-already in database
+added
 >> d dresdner
-removed
+not in database
 >> d dynamicity
-removed
+not in database
 >> a octavia octavia
 added
 >> q denny
-denny
+not found
 >> a fuller's fuller's
 added
 >> q limitless.
-not found
+limitless.
 >> d barcodes
 removed
 >> q obligatus
@@ -1551,35 +1551,35 @@ removed
 >> q coffee
 coffee
 >> a close close
-added
+already in database
 >> q guaranteed
 not found
 >> d annealing
 removed
 >> q just.
-just.
+not found
 >> a urmilla urmilla
-already in database
+added
 >> q nicki
 nicki
 >> d acquired.
-removed
+not in database
 >> d scalp
-removed
+not in database
 >> d troodos
-removed
+not in database
 >> q bethany
-not found
+bethany
 >> q expel,
-expel,
+not found
 >> d lord.
 removed
 >> d hour.
 removed
 >> q okayed
-okayed
+not found
 >> d tie.
-removed
+not in database
 >> d diacriticals
 not in database
 >> d calamitas
@@ -1589,9 +1589,9 @@ unpractical
 >> d infusing
 removed
 >> d cedilla
-removed
+not in database
 >> d dulux
-removed
+not in database
 >> a quadraginta quadraginta
 already in database
 >> a dialogue dialogue
@@ -1603,13 +1603,13 @@ removed
 >> a animist animist
 added
 >> d diuretics
-removed
+not in database
 >> a forsaking forsaking
-already in database
+added
 >> q nicknaming
 nicknaming
 >> a deported deported
-already in database
+added
 >> q chelsea
 chelsea
 >> q beneath,
@@ -1625,29 +1625,29 @@ whiskeys
 >> q rinse
 rinse
 >> d worlds
-removed
+not in database
 >> d duke.
 not in database
 >> q conrad
-not found
+conrad
 >> d snoring
-removed
->> d parietis
 not in database
+>> d parietis
+removed
 >> a promineo promineo
-already in database
+added
 >> q similitudo
 similitudo
 >> a glasslike glasslike
 already in database
 >> q like,
-not found
+like,
 >> q imperishability
 imperishability
 >> a deansgate deansgate
 added
 >> a learn. learn.
-added
+already in database
 >> q poluted.
 poluted.
 >> d do.
@@ -1657,17 +1657,17 @@ removed
 >> q regina
 regina
 >> q deserve,
-deserve,
+not found
 >> a pickets pickets
 already in database
 >> a hershey hershey
 added
 >> q strong.
-strong.
+not found
 >> d club,
 removed
 >> a lille. lille.
-added
+already in database
 >> q pectoris
 not found
 >> a roadsigns roadsigns
@@ -1679,9 +1679,9 @@ not in database
 >> a darlin darlin
 added
 >> d cembalino
-not in database
->> d dickhead
 removed
+>> d dickhead
+not in database
 >> d alton
 removed
 >> d gaudy
@@ -1699,9 +1699,9 @@ genuine,
 >> a lobbyist lobbyist
 already in database
 >> d a
-not in database
+removed
 >> q alarm
-not found
+alarm
 >> a contrive, contrive,
 already in database
 >> d throttles
@@ -1709,29 +1709,29 @@ not in database
 >> q vitiosus
 vitiosus
 >> d algae
-not in database
+removed
 >> a dio dio
 already in database
 >> q tutor.
-tutor.
+not found
 >> a follower, follower,
 already in database
 >> a warhorse warhorse
-already in database
+added
 >> a whined whined
 already in database
 >> a those those
-added
+already in database
 >> q tuna
 not found
 >> a ezrin ezrin
 added
 >> a gnuish gnuish
-already in database
+added
 >> a grosses grosses
 added
 >> q uncivilized
-not found
+uncivilized
 >> a boycotting boycotting
 already in database
 >> d know,
@@ -1741,9 +1741,9 @@ os,
 >> q dvd
 dvd
 >> q winged
-winged
+not found
 >> a vestri vestri
-already in database
+added
 >> a admiralty admiralty
 already in database
 >> a togethers togethers
@@ -1757,15 +1757,15 @@ todt
 >> q select.
 select.
 >> q nonexecutable
-nonexecutable
+not found
 >> d those
-removed
+not in database
 >> d mercy.
 removed
 >> d sidmouth
 removed
 >> q imitative
-not found
+imitative
 >> d favor.
 removed
 >> d tristar
@@ -1773,11 +1773,11 @@ removed
 >> d lighten.
 not in database
 >> q increase
-increase
+not found
 >> d puncture,
 not in database
 >> q knifes
-knifes
+not found
 >> a hotchpotch hotchpotch
 already in database
 >> a fibbing fibbing
@@ -1785,21 +1785,21 @@ already in database
 >> d gangs
 not in database
 >> q proinde
-proinde
->> q mensa
 not found
+>> q mensa
+mensa
 >> q aylesford
-aylesford
+not found
 >> q hold,
 not found
 >> d unpacifiable
-removed
+not in database
 >> q yachtspersons
 not found
 >> d eyes
-removed
+not in database
 >> a conscientia conscientia
-already in database
+added
 >> q nosco
 not found
 >> q avoid;
@@ -1811,9 +1811,9 @@ removed
 >> q infection
 not found
 >> a disgrace, disgrace,
-already in database
+added
 >> d (fem.
-removed
+not in database
 >> d garland
 removed
 >> a salvador salvador
@@ -1821,13 +1821,13 @@ already in database
 >> a bremen bremen
 already in database
 >> q unobvious
-unobvious
+not found
 >> a accrediting accrediting
 already in database
 >> q misrouting
-misrouting
+not found
 >> d damage,
-removed
+not in database
 >> a flattener flattener
 already in database
 >> d circumcisions
@@ -1835,25 +1835,25 @@ removed
 >> a vituperative vituperative
 added
 >> d countryside,
-removed
+not in database
 >> a steadfastly, steadfastly,
 already in database
 >> q froths
 not found
 >> d delilah
-removed
+not in database
 >> a scheldt. scheldt.
 added
 >> d hollow
 not in database
 >> d ashley
-removed
+not in database
 >> a promisce promisce
-added
+already in database
 >> a offero offero
 already in database
 >> a poena poena
-already in database
+added
 >> q sharon
 not found
 >> d gabrielle
@@ -1861,11 +1861,11 @@ removed
 >> q soil.
 soil.
 >> d turkeys
-removed
+not in database
 >> a spear, spear,
 already in database
 >> d oscillate
-removed
+not in database
 >> q lomond
 lomond
 >> q industry,
@@ -1873,9 +1873,9 @@ not found
 >> a promenaders promenaders
 already in database
 >> d appalachian
-removed
+not in database
 >> a esse esse
-added
+already in database
 >> a deliberate. deliberate.
 already in database
 >> a excessively excessively
@@ -1893,11 +1893,11 @@ removed
 >> a orders, orders,
 already in database
 >> a (adv) (adv)
-added
+already in database
 >> q socius
 socius
 >> a with with
-added
+already in database
 >> q honesty.
 honesty.
 >> d nonsequentially
@@ -1907,51 +1907,51 @@ orates
 >> q alberta
 alberta
 >> d acerbitas
-removed
->> d blenheim
 not in database
+>> d blenheim
+removed
 >> q timmy
-timmy
+not found
 >> q gentleness,
-gentleness,
+not found
 >> a revived, revived,
-already in database
+added
 >> d burstier
 removed
 >> q afloat
 afloat
 >> a interstitials interstitials
-already in database
+added
 >> q wimpey
-wimpey
+not found
 >> q namco
-namco
+not found
 >> a facing, facing,
 already in database
 >> a genuineness genuineness
-already in database
+added
 >> a equina equina
 added
 >> q kidderminster
-kidderminster
+not found
 >> q bismark
-bismark
+not found
 >> q bread,
-bread,
+not found
 >> d interfectum
 not in database
 >> a new, new,
-already in database
+added
 >> d full.
 not in database
 >> q positum
-not found
+positum
 >> q entreat,
-entreat,
+not found
 >> q future.
 future.
 >> q pullers
-pullers
+not found
 >> d autopsies
 removed
 >> q sharpest
@@ -1975,7 +1975,7 @@ gathers
 >> a /unknown, /unknown,
 already in database
 >> a remember, remember,
-already in database
+added
 >> d vehementer
 removed
 >> d gwyneth
@@ -1985,16 +1985,16 @@ already in database
 >> a questus questus
 already in database
 >> q absentmindedly
-not found
+absentmindedly
 >> a impetus impetus
-added
+already in database
 >> a autopiloting autopiloting
 already in database
 >> q blow.
-blow.
+not found
 >> d affligo
 removed
 >> q air,
-air,
+not found
 >> d topographically
-removed
+not in database
